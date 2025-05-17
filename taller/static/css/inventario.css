@@ -1,0 +1,119 @@
+/* Contenedor principal */
+.container {
+    max-width: 1000px;
+    margin: 5px auto;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Estilos para formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input[type="text"], form input[type="email"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+
+
+/* Estilos de alertas */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+thead {
+    background-color: #34495e;
+    color: #fff;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* Estilos para la columna de botones de acción */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+/* Estilos para los botones */
+.btn {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #3498db;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+}
+
+.btn-info {
+    background-color: #1abc9c;
+}
+
+.btn-primary:hover,
+.btn-warning:hover,
+.btn-info:hover {
+    opacity: 0.8;
+}
+
+
+/* Contenedor para el filtro y las opciones de administración */
+.dar_baja_equipo {
+    margin-bottom: 20px; /* Espacio debajo del filtro */
+}
+
+/* Contenedor de botones para alinearlos */
+.admin-options {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 10px; /* Espacio superior para separar del filtro */
+    flex-wrap: wrap; /* Para que se acomoden en varias líneas si es necesario */
+}

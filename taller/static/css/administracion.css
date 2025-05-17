@@ -1,0 +1,98 @@
+/* Wrapper and form container to center it */
+.contact-form-wrapper, .contact-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 350px; /* Hacemos el formulario más pequeño */
+    flex-direction: column;
+}
+
+/* Form title */
+.contact-form-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 22px; /* Tamaño de fuente más pequeño */
+    color: #333;
+}
+
+/* Input and Textarea styling */
+.contact-form-container input, 
+.contact-form-container textarea {
+    width: 100%;
+    padding: 10px; /* Reducimos el padding para hacerlos más pequeños */
+    margin-bottom: 15px; /* Reducimos el espacio entre campos */
+    border: 1px solid #28a745; /* Borde verde */
+    border-radius: 5px;
+    background: #f9f9f9;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    color: #555;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover and focus states for inputs */
+.contact-form-container input:focus, 
+.contact-form-container textarea:focus {
+    border-color: #00bfff; /* Contorno celeste al hacer focus */
+    outline: none;
+}
+
+/* Submit button styling - Green */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #28a745; /* Color verde */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover state for submit button */
+button:hover {
+    background: #218838; /* Verde más oscuro al hacer hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .contact-form-container {
+        padding: 15px;
+        max-width: 300px; /* Ajuste para pantallas más pequeñas */
+    }
+    .contact-form-container h2 {
+        font-size: 18px; /* Ajuste de tamaño de título */
+    }
+}
+
+
+.confirmation-message {
+    text-align: center;
+    padding: 20px;
+}
+
+.confirmation-message h2 {
+    color: #28a745;
+}
+
+.confirmation-message p {
+    font-size: 18px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}

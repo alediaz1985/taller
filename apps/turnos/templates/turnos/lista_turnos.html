@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnos Disponibles</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 20px;
+        }
+        .turno {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .disponible {
+            background-color: green;
+        }
+        .pendiente {
+            background-color: yellow;
+            color: black;
+        }
+        .reservado {
+            background-color: red;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Turnos para la Fecha {{ fecha }} (Línea: {{ linea }})</h1>
+    <div class="grid">
+        {% for turno in turnos %}
+        <div class="turno {{ turno.estado }}">
+            {% if turno.estado == 'disponible' %}
+                <a href="{% url 'turnos:reservar_turno' turno.hora %}">{{ turno.hora|time:"H:i" }}</a>
+            {% else %}
+                {{ turno.hora|time:"H:i" }}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

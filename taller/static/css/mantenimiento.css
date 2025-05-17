@@ -1,0 +1,233 @@
+/* Contenedor principal */
+h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-full-width {
+    width: 97%; /* O ajusta a un porcentaje específico según lo necesites */
+    max-width: 100%; /* Limita el ancho máximo a todo el contenedor */
+    padding: 10px 0; /* Ajuste opcional de padding */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: inline-block;
+    color: #555;
+    font-size: 16px;
+}
+
+/* Columna tipo Bootstrap para formularios */
+.col-md-4 {
+    width: 100%;
+    max-width: 33.33%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Inputs y campos de texto */
+input[type="date"],
+select,
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+input[type="date"]:focus,
+select:focus,
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Tabla de resultados */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Botones de acción */
+.button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Botón verde para acciones exitosas */
+.button-green {
+    background-color: #28a745;
+}
+.button-green:hover {
+    background-color: #218838;
+}
+
+/* Botón naranja para advertencias */
+.button-orange {
+    background-color: #ff8800;
+}
+.button-orange:hover {
+    background-color: #e67600;
+}
+
+/* Botón celeste para información */
+.button-blue {
+    background-color: #17a2b8;
+}
+.button-blue:hover {
+    background-color: #138496;
+}
+
+/* Botón gris para acciones secundarias */
+.button-gray {
+    background-color: #6c757d;
+}
+.button-gray:hover {
+    background-color: #5a6268;
+}
+
+/* Botón negro para acciones críticas */
+.button-black {
+    background-color: #343a40;
+}
+.button-black:hover {
+    background-color: #23272b;
+}
+
+/* Mensajes de alerta */
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.messages .message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages .message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.messages .message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Fade-in animation */
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Estilos adicionales de botones en acciones de tabla */
+.action-buttons a {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-right: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons .edit-btn {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.action-buttons .edit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.action-buttons .delete-btn {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.action-buttons .delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+
+
+/* Contenedor de fila en el formulario */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espacio entre columnas */
+}
+
+/* Columna tipo Bootstrap para formularios */
+.col-md-4 {
+    flex: 1; /* Permite que cada columna ocupe el mismo ancho */
+    max-width: 33.33%; /* Ajusta el ancho máximo */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .col-md-4 {
+        max-width: 100%;
+        padding: 5px;
+    }
+}
+

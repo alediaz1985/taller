@@ -1,0 +1,13 @@
+# Usar LF para todos los archivos de texto, ideal para proyectos colaborativos
+*.py     text eol=lf
+*.json   text eol=lf
+*.html   text eol=lf
+*.css    text eol=lf
+*.js     text eol=lf
+*.md     text eol=lf
+
+# Archivos binarios: no tocar
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.pdf    binary

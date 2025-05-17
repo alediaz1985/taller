@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Cédulas Generadas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'cedulas/css/cedulas.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Cédulas Generadas</h1>
+
+<form method="get" class="filtro-form">
+    <label>Dominio:</label>
+    <input type="text" name="dominio" value="{{ request.GET.dominio|default_if_none:'' }}">
+
+    <label>Desde:</label>
+    <input type="date" name="desde" value="{{ request.GET.desde|default_if_none:'' }}">
+
+    <label>Hasta:</label>
+    <input type="date" name="hasta" value="{{ request.GET.hasta|default_if_none:'' }}">
+
+    <button type="submit">Filtrar</button>
+    <a href="{% url 'cedulas:listar_cedulas' %}" class="limpiar-link">Limpiar</a>
+</form>
+
+{% if cedulas %}
+<table class="tabla-cedulas">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Dominio</th>
+            <th>Usuario</th>
+            <th>Archivo PDF</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cedula in cedulas %}
+        <tr>
+            <td>{{ cedula.fecha_subida|date:"d/m/Y H:i" }}</td>
+            <td>{{ cedula.dominio }}</td>
+            <td>{{ cedula.usuario }}</td>
+            <td>
+                <a href="/cedulas_pdf/{{ cedula.ruta_pdf }}" target="_blank">📄 Descargar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="mensaje-vacio">No hay cédulas registradas aún.</p>
+{% endif %}
+{% endblock %}

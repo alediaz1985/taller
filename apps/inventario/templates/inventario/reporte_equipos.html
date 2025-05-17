@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Equipos</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; margin: 20px; }
+        h2 { text-align: center; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Reporte de Inventario de Equipos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Código Interno</th>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Número de Serie</th>
+                <th>Fecha de Compra</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.codigo_interno }}</td>
+                <td>{{ equipo.tipo_bien.nombre }}</td>
+                <td>{{ equipo.marca }}</td>
+                <td>{{ equipo.modelo }}</td>
+                <td>{{ equipo.numero_serie }}</td>
+                <td>{{ equipo.fecha_compra }}</td>
+                <td>
+                    {% if equipo.activo %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

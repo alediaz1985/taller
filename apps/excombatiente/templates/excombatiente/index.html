@@ -1,0 +1,26 @@
+<!-- templates/excombatiente/index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Consulta Excombatientes</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Esto debería renderizar el formulario con el campo DNI -->
+        <button type="submit">Consultar</button>
+    </form>
+
+    {% if resultado %}
+        {% if resultado == "No se encontró ningún excombatiente con ese DNI." %}
+            <p>{{ resultado }}</p>
+        {% else %}
+            <h2>Resultado de la búsqueda</h2>
+            <p>DNI: {{ resultado.dni }}</p>
+            <p>Nombre: {{ resultado.apellido_nombre }}</p>
+            <p>Fuerza: {{ resultado.fuerza }}</p>
+            <p>Grado: {{ resultado.grado }}</p>
+            <p>Condición: {{ resultado.condicion }}</p>
+            <p>¿Vive?: {{ resultado.vive|yesno:"Sí,No" }}</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

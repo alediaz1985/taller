@@ -1,0 +1,8 @@
+<!-- apps/usuarios/templates/usuarios/logout.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Cerrar Sesión</h2>
+  <p>Has cerrado sesión exitosamente.</p>
+  <p><a href="{% url 'usuarios:login' %}">Iniciar Sesión nuevamente</a> o <a href="{% url 'index_global' %}">volver al inicio</a>.</p>
+{% endblock %}

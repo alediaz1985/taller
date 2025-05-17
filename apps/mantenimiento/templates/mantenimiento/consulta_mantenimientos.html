@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mantenimiento.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Consultar Mantenimientos</h2>
+
+    <!-- Formulario de Consulta -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.fecha_inicio.label_tag }}
+                {{ form.fecha_inicio }}
+            </div>
+            <div class="col-md-4">
+                {{ form.fecha_fin.label_tag }}
+                {{ form.fecha_fin }}
+            </div>
+            <div class="col-md-4">
+                {{ form.equipo.label_tag }}
+                {{ form.equipo }}
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="button button-green">Consultar</button>
+                <button type="submit" name="generar_pdf" class="button button-gray">Generar PDF</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Resultados de la Consulta -->
+    {% if mantenimientos %}
+    <h3>Resultados</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Equipo</th>
+                <th>Tipo de Trabajo</th>
+                <th>Observaciones</th>
+                <th>Responsable</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mantenimiento in mantenimientos %}
+            <tr>
+                <td>{{ mantenimiento.fecha|date:"d-m-Y H:i" }}</td>
+                <td>{{ mantenimiento.equipo }}</td>
+                <td>{{ mantenimiento.tipo_trabajo }}</td> 
+                <td>{{ mantenimiento.observaciones }}</td>
+                <td>{{ mantenimiento.responsable }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No se encontraron mantenimientos.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/mantenimiento.js' %}"></script>
+{% endblock %}

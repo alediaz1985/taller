@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Línea</title>
+</head>
+<body>
+    <h1>Seleccionar Vehículo para la Fecha {{ fecha }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="vehiculo">Vehículo:</label>
+        <select id="vehiculo" name="vehiculo" required>
+            <option value="" disabled selected>Seleccione su vehículo</option>
+            <option value="gol">Gol</option>
+            <option value="voyage">Voyage</option>
+            <option value="aveo">Aveo</option>
+            <option value="prisma">Prisma</option>
+            <option value="suran">Suran</option>
+            <option value="206">Peugeot 206</option>
+            <option value="207">Peugeot 207</option>
+            <option value="208">Peugeot 208</option>
+            <option value="307">Peugeot 307</option>
+            <option value="ecosport">Ecosport</option>
+            <option value="audi_a5">Audi A5</option>
+            <option value="408">Peugeot 408</option>
+            <option value="508">Peugeot 508</option>
+            <option value="hilux">Hilux</option>
+            <option value="corolla">Corolla</option>
+        </select>
+        <button type="submit">Continuar</button>
+    </form>
+</body>
+</html>

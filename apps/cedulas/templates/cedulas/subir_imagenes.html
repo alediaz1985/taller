@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Generar Cédula PDF{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'cedulas/css/cedulas.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+{% endblock %}
+
+{% block content %}
+<h1>Generar Cédula PDF</h1>
+
+{% if error %}
+<div style="background-color: #ffdddd; padding: 10px; border: 1px solid #cc0000;">
+    ⚠️ {{ error }}
+</div>
+{% endif %}
+
+<form id="cedula-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Dominio -->
+    <label for="dominio">Dominio del vehículo:</label><br>
+    <input type="text" id="dominio" name="dominio" required><br><br>
+
+    <!-- Frente -->
+    <label for="frente-input">Imagen Frente:</label><br>
+    <input type="file" id="frente-input" name="frente" accept="image/*" required><br>
+    <input type="hidden" name="frente_crop" id="frente-crop">
+    <img id="frente-preview" class="imagen-preview" style="max-width: 400px; display: none; margin-bottom: 15px;"><br>
+
+    <!-- Botón recortar frente -->
+    <button type="button" class="btn-crop" data-input="frente">Recortar Frente</button>
+
+    <hr>
+
+    <!-- Dorso -->
+    <label for="dorso-input">Imagen Dorso:</label><br>
+    <input type="file" id="dorso-input" name="dorso" accept="image/*" required><br>
+    <input type="hidden" name="dorso_crop" id="dorso-crop">
+    <img id="dorso-preview" class="imagen-preview" style="max-width: 400px; display: none; margin-bottom: 15px;"><br>
+
+    <!-- Botón recortar dorso -->
+    <button type="button" class="btn-crop" data-input="dorso">Recortar Dorso</button>
+
+    <br><br>
+    <button type="submit">Generar PDF</button>
+</form>
+
+<!-- Área de recorte dinámica -->
+<h2 style="margin-top: 30px;">Área de Recorte</h2>
+<img id="preview-cropper" style="max-width: 500px; display: none; border: 1px solid #ccc;">
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="{% static 'cedulas/js/cedulas.js' %}"></script>
+{% endblock %}

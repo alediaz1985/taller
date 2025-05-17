@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- Cargar el CSS secundario para la lista de equipos -->
+    <link rel="stylesheet" href="{% static 'css/mantenimiento.css' %}">
+{% endblock %}
+
+{% block title %}Lista de Equipos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Lista de Equipos</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Código Interno</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.codigo_interno }}</td>
+                <td>{{ equipo.nombre }}</td>
+                <td class="action-buttons">
+                    <!-- Botón de Editar -->
+                    <a href="{% url 'mantenimiento:editar_equipo' equipo.id %}" class="edit-btn">Editar</a>
+                    
+                    {% if request.user.is_superuser %}
+                    <!-- Botón de Eliminar solo si el usuario es administrador -->
+                    <a href="{% url 'mantenimiento:eliminar_equipo' equipo.id %}" class="delete-btn" onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No hay equipos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Taller - Sistema de Gestión</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Sistema de Gestión de Taller</h1>
+        </header>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="{% url 'authturno:index' %}">Turnos</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'cedulas:listar_cedulas' %}">📄 Ver cédulas generadas</a></li>
+                    <li><a href="{% url 'index_global' %}">Inicio</a></li>
+                    <!--<li><a href="{% url 'discapacidad:index' %}">Discapacidad</a></li>
+                    <li><a href="{% url 'excombatiente:index' %}">Ex Combatientes</a></li> -->
+                    <li class="dropdown">
+                        <a href="#">Mantenimiento</a>
+                        <ul class="dropdown-content">
+                            <li><a href="{% url 'mantenimiento:consulta_mantenimientos' %}">Consulta</a></li>
+                            <li><a href="{% url 'mantenimiento:registrar_mantenimiento' %}">Registrar</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Inventario</a>
+                        <ul class="dropdown-content">
+                            <li><a href="{% url 'inventario:lista_equipos' %}">Lista de Equipos</a></li>
+                            <li><a href="{% url 'inventario:registrar_equipo' %}">Registrar Equipo</a></li>
+                            {% if user.is_staff %}
+                            <li><a href="{% url 'inventario:lista_tipos_bien' %}">Tipos de Bienes</a></li>
+                            <li><a href="{% url 'inventario:agregar_tipo_bien' %}">Agregar Tipo de Bienes</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'administracion:index' %}">Administración</a></li>
+                    <li><a href="{% url 'notificaciones:index' %}">Notificaciones</a></li>
+                    <li>
+                        <form action="{% url 'usuarios:logout' %}" method="post" class="logout-form">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <main>
+            {% block content %}
+            <!-- El contenido específico de cada página se inserta aquí -->
+            {% endblock %}
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Dirección: Ruta 16 Km 176, Sáenz Peña, Chaco</p>
+                    <p>Teléfono: +54 364 4122222</p>
+                    <p>Email: <a href="mailto:centsp@hotmail.com.ar">centsp@hotmail.com.ar</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Útiles</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="{% url 'administracion:contacto' %}">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <ul class="social-links">
+                        <li><a href="https://www.facebook.com/rtopolentarutti" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="https://www.instagram.com/rtopolentarutti" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://www.rtopolentarutti.com.ar" target="_blank"><i class="fas fa-globe"></i> WebPage</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Taller. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+        
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

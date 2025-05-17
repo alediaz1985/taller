@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mantenimiento.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Registrar Mantenimiento de Equipos</h2>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Formulario de Registro de Mantenimiento -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row row">
+            <div class="form-group col-md-4 flex-item">
+                <label for="equipo">Equipo:</label>
+                {{ mantenimiento_form.equipo }}
+            </div>
+            <div class="form-group col-md-4 flex-item">
+                <label for="tipo_trabajo">Tipo de Trabajo:</label>
+                {{ mantenimiento_form.tipo_trabajo }}
+            </div>
+        </div>
+        <div class="form-group form-full-width">
+            <label for="observaciones">Observaciones:</label>
+            {{ mantenimiento_form.observaciones }}
+        </div>  
+        <button type="submit" class="button button-blue btn-primary">Registrar Mantenimiento</button>
+    </form>
+
+    <hr>
+
+    <!-- Formulario para Añadir Nuevo Tipo de Trabajo -->
+    <h3>Añadir Nuevo Tipo de Trabajo</h3>
+    <form method="post" class="form-add-tipo-trabajo">
+        {% csrf_token %}
+        <div class="form-group form-full-width">
+            {{ tipo_trabajo_form.as_p }}
+        </div>
+        <button type="submit" name="add_tipo_trabajo" class="button button-gray btn-secondary">Añadir Tipo de Trabajo</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/discapacitado.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="resultado-consulta-container">
+    <h2>Resultado de la Consulta</h2>
+    {% for discapacitado in discapacitados %}
+        <h3>DNI: {{ discapacitado.dni }}   Apellido: {{ discapacitado.apellido }}   Nombre: {{ discapacitado.nombre }} </h3>
+        <p>Dirección: {{ discapacitado.direccion }}   Teléfono: {{ discapacitado.telefono }} </p>
+        <h2>Patente: {{ discapacitado.numero_patente }}</h2>
+        <p></p>
+        <h4>Historial de Asistencias:</h4>
+        <ul>
+            {% for asistencia in discapacitado.asistencias.all %}
+                <li>Fecha de asistencia: {{ asistencia.fecha_asistencia }}</li>
+            {% empty %}
+                <li>No hay registros de asistencia.</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</div>
+{% endblock %}

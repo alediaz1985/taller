@@ -1,0 +1,116 @@
+/* Estilos básicos para el contenedor del formulario */
+.login-container {
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el título del formulario */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #007c76; /* Cambiado a un tono verde azulado */
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+/* Estilos para los campos del formulario */
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Estilos para el botón */
+.login-container button[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007c76; /* Cambiado a un tono verde azulado */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Efecto hover para el botón */
+.login-container button[type="submit"]:hover {
+    background-color: #006d69; /* Un poco más oscuro para el efecto hover */
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+    background-color: #f8d7da; /* Fondo rojo suave */
+    color: #721c24; /* Texto rojo oscuro */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.error-message ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.error-message li {
+    list-style-type: disc;
+}
+
+/* Estilos para asegurarse de que los errores se vean bien */
+.login-container .error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.login-container .error-message p {
+    margin: 0;
+}
+
+/* Estilo básico para todos los mensajes */
+.message {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+/* Estilo para mensajes de error */
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Estilo para mensajes de éxito (por si decides agregar más adelante) */
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}

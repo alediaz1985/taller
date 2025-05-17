@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Fecha</title>
+</head>
+<body>
+    <h1>Seleccionar Fecha para Turnos</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+        <button type="submit">Ver Turnos</button>
+    </form>
+</body>
+</html>

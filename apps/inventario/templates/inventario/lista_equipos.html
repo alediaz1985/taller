@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+{% endblock %}
+
+{% block title %}Inventario de Equipos{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Inventario de Equipos</h3>
+    <!-- Filtro por Tipo de Bien -->
+    <div class="dar_baja_equipo">
+        <form method="get" action="{% url 'inventario:lista_equipos' %}" class="mb-3">
+            <div class="form-group">
+                <label for="tipo_bien">Filtrar por Tipo de Bien:</label>
+                <select name="tipo_bien" id="tipo_bien" class="form-control" onchange="this.form.submit()">
+                    <option value="">Todos</option>
+                    {% for tipo in tipos_bien %}
+                        <option value="{{ tipo.id }}"    {% if tipo.id|stringformat:"s" == request.GET.tipo_bien %}selected{% endif %}>{{ tipo.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <!-- Mensaje para usuarios no administradores -->
+    {% if not request.user.is_superuser %}
+        <div class="alert alert-warning" role="alert">
+            Para modificaciones de equipos se debe ingresar como administrador.
+        </div>
+    {% endif %}
+
+    <!-- Opciones solo para administradores -->
+    {% if request.user.is_superuser %}
+    <div class="admin-options">
+        <a href="{% url 'inventario:registrar_equipo' %}" class="btn btn-primary edit-btn">Registrar Nuevo Equipo</a>
+        <a href="{% url 'inventario:lista_tipos_bien' %}" class="btn btn-info">Gestionar Tipos de Bien</a>  
+        <a href="{% url 'inventario:generar_pdf_equipos' %}?{% if request.GET.tipo_bien %}tipo_bien={{ request.GET.tipo_bien }}{% endif %}" 
+        class="btn btn-primary edit-btn">Generar PDF</a>
+        <a href="{% url 'inventario:generar_etiquetas_equipos' %}" class="btn btn-primary">Generar PDF de Etiquetas</a>
+    </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código Interno</th>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Número de Serie</th>
+                <th>Fecha de Compra</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.codigo_interno }}</td>
+                <td>{{ equipo.tipo_bien.nombre }}</td>
+                <td>{{ equipo.marca }}</td>
+                <td>{{ equipo.modelo }}</td>
+                <td>{{ equipo.numero_serie }}</td>
+                <td>{{ equipo.fecha_compra }}</td>
+                <td>
+                    {% if equipo.activo %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                </td>
+                <td class="action-buttons">
+                    <a href="{% url 'inventario:editar_equipo' equipo.id %}" class="btn btn-primary edit-btn">Editar</a>
+                    {% if equipo.activo %}
+                        <a href="{% url 'inventario:dar_baja_equipo' equipo.id %}" class="btn btn-warning">Dar de Baja</a>
+                    {% endif %}
+                    <a href="{% url 'inventario:historial_baja_equipo' equipo.id %}" class="btn btn-info">Historial de Baja</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

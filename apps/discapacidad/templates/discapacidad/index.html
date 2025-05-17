@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/discapacitado.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="section-title">Discapacidad</h2>
+
+    <!-- Bloque para mostrar mensajes -->
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="message {{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <form method="post" action="{% url 'discapacidad:verificar' %}" class="verification-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="dni" placeholder="Ingrese DNI" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="numero_patente" placeholder="Ingrese Número de Patente" class="form-control">
+        </div>
+        <div class="form-group button-group">
+            <button type="submit" name="accion" value="consultar" class="btn btn-primary">Consultar</button>
+            <button type="submit" name="accion" value="registrar_asistencia" class="btn btn-secondary">Registrar Asistencia</button>
+        </div>
+    </form>
+
+    <ul class="discapacitados-list">
+        {% for discapacitado in discapacitados|dictsortreversed:"dni" %}
+            <li class="discapacitado-item">
+                DNI: {{ discapacitado.dni }} - Apellido y Nombre: {{ discapacitado.apellido }}, {{ discapacitado.nombre }} - Patente: {{ discapacitado.numero_patente }} 
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/discapacitado.js' %}"></script>
+{% endblock %}

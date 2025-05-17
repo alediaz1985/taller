@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+{% endblock %}
+{% block title %}Registrar Equipo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Registrar Nuevo Equipo</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_tipo_bien">Tipo de Bien</label>
+            {{ form.tipo_bien }}
+        </div>
+
+        <div class="form-group">
+            <label for="codigo_interno">Código Interno</label>
+            <input type="text" id="codigo_interno" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="id_marca">Marca</label>
+            {{ form.marca }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_modelo">Modelo</label>
+            {{ form.modelo }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_numero_serie">Número de Serie</label>
+            {{ form.numero_serie }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_fecha_compra">Fecha de Compra</label>
+            {{ form.fecha_compra }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Registrar Equipo</button>
+        <a href="{% url 'inventario:lista_equipos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("id_tipo_bien").addEventListener("change", function() {
+        const tipoBienId = this.value;
+        
+        if (tipoBienId) {
+            fetch("{% url 'inventario:obtener_numero_inventario' %}?tipo_bien_id=" + tipoBienId)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("codigo_interno").value = data.codigo_interno || "Código no disponible";
+                })
+                .catch(error => console.error("Error al obtener el código interno:", error));
+        } else {
+            document.getElementById("codigo_interno").value = ""; 
+        }
+    });
+});
+</script>
+{% endblock %}

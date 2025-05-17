@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+{% endblock %}
+
+{% block title %}Agregar Tipo de Bien{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Agregar Tipo de Bien</h2>
+    
+    <!-- Mostrar mensajes de éxito o error -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_nombre">Nombre del Tipo de Bien</label>
+            {{ form.nombre }}
+        </div>
+        <div class="form-group">
+            <label for="id_prefijo">Prefijo del Código Interno</label>
+            {{ form.prefijo }}
+        </div>
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Registrar Tipo de Bien</button>
+            <a href="{% url 'inventario:lista_tipos_bien' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

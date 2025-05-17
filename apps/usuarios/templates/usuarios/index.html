@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form method="post" id="loginForm">
+        {% csrf_token %}
+        <div id="errorMessage" class="error-message"></div>
+        {{ form.as_p }}
+        <button type="submit">Ingresar</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

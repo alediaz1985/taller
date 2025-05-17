@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Registrar Turno
+{% endblock title %}
+
+{% block content %}
+<div class="container form-container">
+    <h1><i class="fas fa-calendar-alt"></i> Registrar Turno</h1>
+    <form method="POST" action="{% url 'authturno:index' %}" class="styled-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group">
+                <label for="{{ form.fecha_turno.id_for_label }}">{{ form.fecha_turno.label }}</label>
+                {{ form.fecha_turno }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.numero_dominio.id_for_label }}">{{ form.numero_dominio.label }}</label>
+                {{ form.numero_dominio }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="{{ form.apellido.id_for_label }}">{{ form.apellido.label }}</label>
+                {{ form.apellido }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
+                {{ form.nombre }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="{{ form.modelo_vehiculo.id_for_label }}">{{ form.modelo_vehiculo.label }}</label>
+                {{ form.modelo_vehiculo }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.localidad.id_for_label }}">{{ form.localidad.label }}</label>
+                {{ form.localidad }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="{{ form.telefono.id_for_label }}">{{ form.telefono.label }}</label>
+                {{ form.telefono }}
+            </div>
+        </div>
+        <div class="form-group submit-btn">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Generar PDF</button>
+        </div>
+    </form>
+    
+</div>
+{% endblock content %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'authturno/css/authturno.css' %}">
+{% endblock extra_css %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/authturno.js' %}"></script>
+{% endblock extra_js %}

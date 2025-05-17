@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>{% if form.instance.pk %}Editar Tipo de Bien{% else %}Agregar Tipo de Bien{% endif %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">
+            {% if form.instance.pk %}Guardar Cambios{% else %}Registrar{% endif %}
+        </button>
+        <a href="{% url 'inventario:lista_tipos_bien' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

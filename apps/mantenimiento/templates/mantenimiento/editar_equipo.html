@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- Carga el CSS secundario específico para esta página -->
+    <link rel="stylesheet" href="{% static 'css/mantenimiento.css' %}">
+{% endblock %}
+
+{% block title %}Editar Equipo{% endblock %}
+
+{% block content %}
+<div class="container mantenimiento-container">
+    <h2 class="mantenimiento-title">Editar Equipo</h2>
+
+    <!-- Enlace para ver el historial, solo accesible si está logueado como administrador -->
+    {% if request.user.is_superuser %}
+    <a href="{% url 'mantenimiento:historial_equipo' object.id %}" class="btn btn-secondary mantenimiento-btn-secondary">HISTORIA</a>
+    {% endif %}
+
+    <form method="post" class="mantenimiento-form">
+        {% csrf_token %}
+        <!-- Formulario de edición -->
+        <div class="mantenimiento-form-group">
+            {{ form.as_p }}
+        </div>
+        
+        <!-- Botones de acción -->
+        <button type="submit" class="btn btn-primary mantenimiento-btn-primary">Guardar Cambios</button>
+        <a href="{% url 'mantenimiento:lista_equipos' %}" class="btn btn-secondary mantenimiento-btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

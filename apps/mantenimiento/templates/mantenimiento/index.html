@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mantenimiento.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Módulo de Mantenimiento</h2>
+
+    <div class="button-container">
+        <a href="{% url 'mantenimiento:consulta_mantenimientos' %}" class="btn-main btn-consulta">Consulta</a>
+        <a href="{% url 'mantenimiento:registrar_mantenimiento' %}" class="btn-main btn-registrar">Registrar</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/mantenimiento.js' %}"></script>
+{% endblock %}

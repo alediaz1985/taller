@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Historial de Bajas de {{ equipo.codigo_interno }}</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Fecha de Baja</th>
+            <th>Motivo</th>
+            <th>Registrado por</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for baja in historial %}
+        <tr>
+            <td>{{ baja.fecha_baja }}</td>
+            <td>{{ baja.motivo }}</td>
+            <td>{{ baja.registrado_por }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No hay registros de baja para este equipo.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
