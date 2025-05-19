@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}Cédulas Generadas{% endblock %}
 
 {% block extra_css %}
@@ -7,46 +8,63 @@
 {% endblock %}
 
 {% block content %}
-<h1>Cédulas Generadas</h1>
+<div class="contenedor-cedula">
+    <h1>📁 Cédulas Generadas</h1>
 
-<form method="get" class="filtro-form">
-    <label>Dominio:</label>
-    <input type="text" name="dominio" value="{{ request.GET.dominio|default_if_none:'' }}">
+    <form method="get" class="filtro-form">
+        <div class="filtro-grupo">
+            <label for="dominio">Dominio:</label>
+            <input type="text" id="dominio" name="dominio" value="{{ request.GET.dominio|default_if_none:'' }}">
+        </div>
+        <div class="filtro-grupo">
+            <label for="desde">Desde:</label>
+            <input type="date" id="desde" name="desde" value="{{ request.GET.desde|default_if_none:'' }}">
+        </div>
+        <div class="filtro-grupo">
+            <label for="hasta">Hasta:</label>
+            <input type="date" id="hasta" name="hasta" value="{{ request.GET.hasta|default_if_none:'' }}">
+        </div>
+        <div class="filtro-botones">
+            <button type="submit" class="btn-filtrar">🔍 Filtrar</button>
+            <a href="{% url 'cedulas:listar_cedulas' %}" class="btn-limpiar">❌ Limpiar</a>
+        </div>
+    </form>
 
-    <label>Desde:</label>
-    <input type="date" name="desde" value="{{ request.GET.desde|default_if_none:'' }}">
-
-    <label>Hasta:</label>
-    <input type="date" name="hasta" value="{{ request.GET.hasta|default_if_none:'' }}">
-
-    <button type="submit">Filtrar</button>
-    <a href="{% url 'cedulas:listar_cedulas' %}" class="limpiar-link">Limpiar</a>
-</form>
-
-{% if cedulas %}
-<table class="tabla-cedulas">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Dominio</th>
-            <th>Usuario</th>
-            <th>Archivo PDF</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cedula in cedulas %}
-        <tr>
-            <td>{{ cedula.fecha_subida|date:"d/m/Y H:i" }}</td>
-            <td>{{ cedula.dominio }}</td>
-            <td>{{ cedula.usuario }}</td>
-            <td>
-                <a href="/cedulas_pdf/{{ cedula.ruta_pdf }}" target="_blank">📄 Descargar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p class="mensaje-vacio">No hay cédulas registradas aún.</p>
-{% endif %}
+    {% if cedulas %}
+    <div class="tabla-scroll">
+        <table class="tabla-cedulas">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">📅 Fecha</th>
+                    <th style="width: 20%;">🚗 Dominio</th>
+                    <th style="width: 30%;">👤 Usuario</th>
+                    <th style="width: 30%; text-align: center;">📎 Archivo PDF</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cedula in cedulas %}
+                <tr>
+                    <td>{{ cedula.fecha_subida|date:"d/m/Y H:i" }}</td>
+                    <td>{{ cedula.dominio }}</td>
+                    <td>{{ cedula.usuario }}</td>
+                    <td style="text-align: center;">
+                        {% if cedula.archivo_existe %}
+                        <a href="/cedulas_pdf/{{ cedula.ruta_pdf }}" target="_blank" class="pdf-boton" title="Descargar PDF">
+                            <img src="{% static 'cedulas/images/pdf-icon.png' %}" alt="PDF" class="icono-pdf">
+                        </a>
+                        {% else %}
+                        <span class="archivo-no-disponible" title="Archivo no disponible">
+                            <i class="fas fa-ban"></i>
+                        </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="mensaje-vacio">No hay cédulas registradas aún.</p>
+    {% endif %}
+</div>
 {% endblock %}

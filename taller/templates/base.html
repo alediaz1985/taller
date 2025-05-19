@@ -7,7 +7,7 @@
     {% load static %}
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -18,10 +18,18 @@
         
         <nav>
             <ul class="nav-menu">
+                <li><a href="{% url 'index_global' %}">Inicio</a></li>
                 <li><a href="{% url 'authturno:index' %}">Turnos</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'cedulas:listar_cedulas' %}">📄 Ver cédulas generadas</a></li>
-                    <li><a href="{% url 'index_global' %}">Inicio</a></li>
+                    <li class="dropdown">
+                            <a href="#">Cedulas</a>
+                            <ul class="dropdown-content">
+                                <li><a href="{% url 'cedulas:generar_pdf' %}">Cargar Cédula</a></li>
+                                <li><a href="{% url 'cedulas:listar_cedulas' %}">Consultar Cédulas Generadas</a></li>
+                            </ul>
+                    </li>
+
+                    
                     <!--<li><a href="{% url 'discapacidad:index' %}">Discapacidad</a></li>
                     <li><a href="{% url 'excombatiente:index' %}">Ex Combatientes</a></li> -->
                     <li class="dropdown">

@@ -1,101 +1,328 @@
-.imagen-preview {
-    max-width: 100%;
+.contenedor-cedula {
+    max-width: 960px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.formulario-cedula {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.grupo-campo label {
+    font-weight: bold;
+    color: #34495e;
+    display: block;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="file"] {
+    padding: 10px;
     border: 1px solid #ccc;
-    margin-top: 10px;
-    display: none;
-}
-
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 20px;
-}
-
-h1 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-}
-
-.filtro-form {
-    background-color: #ffffff;
-    padding: 15px;
-    border: 1px solid #ddd;
     border-radius: 6px;
-    margin-bottom: 20px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.imagenes-lado-a-lado {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.imagen-contenedor {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.imagen-preview {
+    width: 100%;
+    max-height: 380px;
+    object-fit: contain;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    margin-bottom: auto;
+}
+
+.btn-crop {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    width: 100%;
+}
+
+.btn-crop:hover {
+    background-color: #e67e22;
+}
+
+.boton-centro {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-principal {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-principal:hover {
+    background-color: #2980b9;
+}
+
+.recorte-area {
+    margin-top: 40px;
+    text-align: center;
+    border-top: 1px dashed #ccc;
+    padding-top: 30px;
+}
+
+.imagen-recorte {
+    max-width: 100%;
+    max-height: 500px;
+    border: 1px solid #aaa;
+    display: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    background-color: #fefefe;
+}
+
+.mensaje-error {
+    background-color: #ffe0e0;
+    color: #a94442;
+    padding: 12px 20px;
+    border: 1px solid #d9534f;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ========== FILTRO DE BÚSQUEDA ========== */
+.filtro-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: flex-end;
+}
+
+.filtro-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filtro-grupo label {
+    font-weight: bold;
+    color: #34495e;
+}
+
+.filtro-botones {
+    display: flex;
     gap: 10px;
     align-items: center;
 }
 
-.filtro-form label {
-    font-weight: bold;
-}
-
-.filtro-form input[type="text"],
-.filtro-form input[type="date"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.filtro-form button {
+.btn-filtrar {
     background-color: #3498db;
     color: white;
+    padding: 8px 16px;
     border: none;
-    padding: 7px 15px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
-.filtro-form button:hover {
+.btn-filtrar:hover {
     background-color: #2980b9;
 }
 
-.limpiar-link {
-    margin-left: 10px;
-    text-decoration: none;
+.btn-limpiar {
     color: #888;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.limpiar-link:hover {
+.btn-limpiar:hover {
     text-decoration: underline;
+}
+
+
+
+/* Estilo contenedor principal */
+.contenedor-cedula {
+    max-width: 100%;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Título principal */
+.contenedor-cedula h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formulario de filtros */
+.filtro-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.filtro-grupo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+.filtro-grupo label {
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 5px;
+}
+
+.filtro-grupo input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.filtro-botones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-filtrar {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-filtrar:hover {
+    background-color: #2980b9;
+}
+
+.btn-limpiar {
+    background-color: #e0e0e0;
+    color: #444;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-limpiar:hover {
+    background-color: #ccc;
+}
+
+/* Tabla de cédulas */
+.tabla-scroll {
+    overflow-x: auto;
 }
 
 .tabla-cedulas {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-top: 10px;
 }
 
 .tabla-cedulas th,
 .tabla-cedulas td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
     text-align: left;
+    vertical-align: middle;
 }
 
 .tabla-cedulas th {
     background-color: #2c3e50;
     color: white;
+    font-weight: bold;
+    text-align: center;
 }
 
 .tabla-cedulas tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
 }
 
-.tabla-cedulas a {
-    color: #2980b9;
-    text-decoration: none;
+.tabla-cedulas td {
+    text-align: center;
 }
 
-.tabla-cedulas a:hover {
-    text-decoration: underline;
+/* Ícono PDF */
+.pdf-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 6px;
+    transition: background-color 0.3s ease;
+    background-color: transparent;
 }
 
+.icono-pdf {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.pdf-boton:hover .icono-pdf {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 4px rgba(231, 76, 60, 0.7));
+}
+
+.archivo-no-disponible {
+    color: #bd2130;
+    font-size: 20px;
+    display: inline-block;
+}
+
+/* Mensaje si no hay resultados */
 .mensaje-vacio {
     color: #999;
     font-style: italic;
+    text-align: center;
+    margin-top: 30px;
 }
