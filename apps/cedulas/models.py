@@ -35,7 +35,8 @@ def ruta_archivo(instance, filename):
 
 class Cedula(models.Model):
     dominio = models.CharField(max_length=10)
-    ruta_pdf = models.TextField(null=True, blank=True)  # NUEVO
+    ruta_pdf = models.TextField(null=True, blank=True)
+    observaciones = models.TextField(null=True, blank=True) 
     usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     fecha_subida = models.DateTimeField(auto_now_add=True)
 

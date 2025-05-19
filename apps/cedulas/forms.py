@@ -5,7 +5,7 @@ from .models import Cedula
 class CedulaForm(forms.ModelForm):
     class Meta:
         model = Cedula
-        fields = ['dominio']
+        fields = ['dominio', 'observaciones']
 
     def save(self, commit=True):
         instance = super().save(commit=False)

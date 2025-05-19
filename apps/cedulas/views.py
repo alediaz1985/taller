@@ -12,6 +12,7 @@ from datetime import datetime
 from io import BytesIO
 from PIL import Image
 from .forms import CedulaForm
+import locale
 
 from django.conf import settings
 from .models import Cedula
@@ -24,6 +25,7 @@ def recortar(imagen, crop_data):
     x, y, w, h = map(int, crop_data.split(","))
     imagen_pil = Image.open(imagen)
     return imagen_pil.crop((x, y, x + w, y + h))
+
 
 @login_required
 def generar_pdf_cedula(request):
@@ -66,6 +68,7 @@ def generar_pdf_cedula(request):
         text_width = p.stringWidth(encabezado, "Helvetica-Bold", 14)
         p.drawString((page_width - text_width) / 2, y_base + 65 * mm, encabezado)
 
+
         def dibujar(imagen, x, y):
             max_width = ancho_mm * mm
             max_height = alto_mm * mm
@@ -97,6 +100,13 @@ def generar_pdf_cedula(request):
         dibujar(frente_img, x_frente, y_base)
         dibujar(dorso_img, x_dorso, y_base)
 
+        observaciones = request.POST.get('observaciones', '').strip()
+        if observaciones:
+            p.setFont("Helvetica", 12)
+            p.setFillColorRGB(0.2, 0.2, 0.2)  # Gris oscuro
+            texto_obs = f"Observaciones: {observaciones}"
+            p.drawString(20 * mm, y_base + -5 * mm, texto_obs)
+
         p.showPage()
         p.save()
         buffer.seek(0)
@@ -104,8 +114,20 @@ def generar_pdf_cedula(request):
         # Guardar en disco como antes
         hoy = datetime.now()
         año = str(hoy.year)
-        MES = hoy.strftime("%m %B").title()
+
+        # Configurar locale en español para obtener el nombre del mes en español
+        try:
+            locale.setlocale(locale.LC_TIME, 'Spanish_Argentina')  # Para Windows
+        except locale.Error:
+            try:
+                locale.setlocale(locale.LC_TIME, 'es_AR.utf8')  # Para Linux
+            except locale.Error:
+                locale.setlocale(locale.LC_TIME, '')  # Valor por defecto del sistema
+
+        MES = hoy.strftime("%m %B").title()  # Ejemplo: "05 Mayo"
+
         dia = f"{hoy.day:02}"
+
         carpeta = Path(f"C:/CEDULAS/{año}/{MES}/{dia}")
         carpeta.mkdir(parents=True, exist_ok=True)
 
@@ -116,10 +138,13 @@ def generar_pdf_cedula(request):
         # Guardar solo la ruta relativa a C:/CEDULAS para que se pueda usar por URL
         ruta_relativa = ruta_pdf.relative_to(Path(settings.CEDULAS_DIR))
 
+        observaciones = request.POST.get('observaciones', '')
+
         Cedula.objects.create(
             dominio=dominio.upper(),
             ruta_pdf=str(ruta_relativa).replace('\\', '/'),  # ejemplo: 2025/Mayo/17/ABC123_cedula.pdf
-            usuario=request.user
+            usuario=request.user,
+            observaciones=observaciones
         )
 
 

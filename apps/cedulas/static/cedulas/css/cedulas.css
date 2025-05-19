@@ -168,6 +168,17 @@ input[type="file"] {
 }
 
 
+.campo-observaciones {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    resize: vertical;
+    min-height: 80px;
+}
+
+
 
 /* Estilo contenedor principal */
 .contenedor-cedula {
