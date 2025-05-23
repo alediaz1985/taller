@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Buscador de PDFs{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'buscadorpdf/css/buscadorpdf.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('folder-selector')?.addEventListener('change', function (e) {
+    const files = e.target.files;
+    if (files.length > 0) {
+        const path = files[0].webkitRelativePath;
+        const folderPath = path.split("/")[0];
+        document.getElementById('ruta-input').value = folderPath;
+    }
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="busqueda-container">
+    <h1>📁 Buscar Archivos PDF</h1>
+
+    <!-- FORMULARIO DE BÚSQUEDA -->
+    <form method="get" action="{% url 'buscadorpdf:buscar_pdf' %}" class="formulario-busqueda">
+        <div class="grupo-formulario">
+            <label for="ruta-input">Ruta base disponible (detectadas):</label>
+            <select id="ruta-input" name="directorio_busqueda" required>
+                <option value="">Seleccionar ruta...</option>
+                {% for opcion in opciones %}
+                    <option value="{{ opcion }}" {% if form.data.directorio_busqueda == opcion %}selected{% endif %}>{{ opcion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="nombre-archivo">Nombre de archivo (opcional):</label>
+            <input type="text" id="nombre-archivo" name="nombre_archivo" value="{{ form.data.nombre_archivo }}">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="fecha-desde">Fecha desde:</label>
+            <input type="date" id="fecha-desde" name="fecha_desde" value="{{ form.data.fecha_desde }}">
+        </div>
+
+        <div class="grupo-formulario">
+            <label for="fecha-hasta">Fecha hasta:</label>
+            <input type="date" id="fecha-hasta" name="fecha_hasta" value="{{ form.data.fecha_hasta }}">
+        </div>
+
+        <button type="submit">🔍 Buscar</button>
+    </form>
+
+    <!-- BOTONES PDF -->
+    {% if resultados %}
+    <div class="acciones-pdf">
+        <form method="post" action="{% url 'buscadorpdf:generar_pdf_contenido' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-pdf">
+                <img src="{% static 'buscadorpdf/images/pdf-icon.png' %}" alt="PDF Icon"> Unir Archivos a PDF
+            </button>
+        </form>
+
+        <a href="{% url 'buscadorpdf:exportar_pdf' %}?directorio_busqueda={{ form.data.directorio_busqueda }}&nombre_archivo={{ form.data.nombre_archivo }}" class="btn-pdf">
+            <img src="{% static 'buscadorpdf/images/pdf-icon.png' %}" alt="PDF Icon"> Exportar listado de Archivos a PDF
+        </a>
+    </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="info" role="alert">
+            {{ error|safe }}
+        </div>
+    {% endif %}
+
+
+    {% if resultados %}
+    <div class="resultados">
+        <h2>📄 Resultados encontrados:</h2>
+        <ul>
+            {% for r in resultados %}
+            <li class="resultado-item">
+                <span class="nombre-archivo"><strong>{{ r.nombre }}</strong></span>
+                <span class="fecha-archivo">{{ r.fecha|date:"d/m/Y H:i" }}</span>
+                <span class="ruta-archivo">{{ r.ruta }}</span>
+                <a href="{% url 'buscadorpdf:abrir_pdf' %}?ruta={{ r.ruta|urlencode }}" 
+                target="_blank" class="icono-pdf" title="Abrir archivo">
+                    <img src="{% static 'buscadorpdf/images/pdf-icon.png' %}" alt="Abrir PDF">
+                </a>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

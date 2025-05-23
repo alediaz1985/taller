@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'apps.consultas',
     'apps.soporte',
     'apps.turnos',
-
+    'apps.buscadorpdf',
 ]
 
 MESSAGE_TAGS = {
@@ -112,9 +112,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'taller', 'static'),
-    os.path.join(BASE_DIR, 'apps', 'authturno', 'static', 'images'),
+    os.path.join(BASE_DIR, 'apps', 'authturno', 'buscadorpdf', 'static', 'images'),
 ]
-STATIC_BASE_PATH = os.path.join(BASE_DIR, 'apps', 'authturno', 'static', 'images')
+STATIC_BASE_PATH = os.path.join(BASE_DIR, 'apps', 'authturno', 'buscadorpdf', 'static', 'images')
 
 CEDULAS_DIR = 'C:/CEDULAS'
 CEDULAS_URL = '/cedulas_pdf/'  # Ruta pública para acceder desde el navegador

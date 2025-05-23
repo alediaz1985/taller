@@ -21,4 +21,5 @@ urlpatterns = [
     path('soporte/', include('apps.soporte.urls')),
     path('turnos/', include('apps.turnos.urls')),
     path('accounts/', include('apps.usuarios.urls')),
+    path('archivos/', include('apps.buscadorpdf.urls', namespace='buscadorpdf')),
 ] + static(settings.CEDULAS_URL, document_root=settings.CEDULAS_DIR)
