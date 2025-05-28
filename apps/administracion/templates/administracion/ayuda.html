@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'administracion/css/ayuda.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container ayuda-container">
+  <h2><i class="bi bi-question-circle-fill"></i> Centro de Ayuda - Proyecto Revinor</h2>
+  <p class="ayuda-intro">Explorá la guía completa del sistema. Seleccioná un módulo para ver sus funcionalidades y cómo utilizarlas paso a paso.</p>
+
+  <div class="accordion" id="ayudaAccordion">
+
+    <!-- ADMINISTRACION -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAdmin">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="false" aria-controls="collapseAdmin">
+          <i class="bi bi-gear"></i> Administración General
+        </button>
+      </h2>
+      <div id="collapseAdmin" class="accordion-collapse collapse" aria-labelledby="headingAdmin" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Gestión del sistema base, acceso al panel global, configuración de permisos y navegación.</p>
+          <ol>
+            <li>Acceder al panel principal desde la ruta <code>/admin</code>.</li>
+            <li>Gestionar accesos, ayuda, estructura de menú y mensajes globales.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- TURNOS -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTurnos">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTurnos" aria-expanded="false" aria-controls="collapseTurnos">
+          <i class="bi bi-calendar-check"></i> Gestión de Turnos
+        </button>
+      </h2>
+      <div id="collapseTurnos" class="accordion-collapse collapse" aria-labelledby="headingTurnos" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Permite reservar, administrar y verificar turnos por dominio o identificación.</p>
+          <ol>
+            <li>Ir a <strong>Turnos</strong> en el menú.</li>
+            <li>Seleccionar fecha y hora disponible (verde).</li>
+            <li>Completar datos: dominio, DNI, contacto y correo electrónico.</li>
+            <li>Recibirás confirmación por mail.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSCADOR PDF -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingBuscador">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBuscador" aria-expanded="false" aria-controls="collapseBuscador">
+          <i class="bi bi-file-earmark-text"></i> Buscador de Documentos PDF
+        </button>
+      </h2>
+      <div id="collapseBuscador" class="accordion-collapse collapse" aria-labelledby="headingBuscador" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Busca archivos PDF por patente, fecha o contenido. También permite generar informes.</p>
+          <ol>
+            <li>Ingresar a <strong>Buscar PDF</strong>.</li>
+            <li>Colocar el dominio (ej: AB123CD).</li>
+            <li>Filtrar por fecha si se desea.</li>
+            <li>Ver los resultados y descargar los archivos o un informe global en PDF.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- CÉDULAS -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingCedulas">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCedulas" aria-expanded="false" aria-controls="collapseCedulas">
+          <i class="bi bi-card-image"></i> Carga y Generación de Cédulas
+        </button>
+      </h2>
+      <div id="collapseCedulas" class="accordion-collapse collapse" aria-labelledby="headingCedulas" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Subida de frente y dorso de documentos, recorte, generación de PDFs proporcionales y registro automático.</p>
+          <ol>
+            <li>Ingresar a la sección <strong>Cédulas</strong>.</li>
+            <li>Subir imagen del frente y luego del dorso.</li>
+            <li>Recortar si es necesario.</li>
+            <li>Presionar <strong>Generar PDF</strong>. Se almacenará con formato 85mm x 56mm por lado.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVENTARIO -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingInventario">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInventario" aria-expanded="false" aria-controls="collapseInventario">
+          <i class="bi bi-box-seam"></i> Gestión de Inventario
+        </button>
+      </h2>
+      <div id="collapseInventario" class="accordion-collapse collapse" aria-labelledby="headingInventario" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Registro y control de equipos y recursos: código, tipo, marca, número de serie y estado.</p>
+          <ol>
+            <li>Acceder al módulo <strong>Inventario</strong>.</li>
+            <li>Agregar nuevos equipos con sus datos completos.</li>
+            <li>Editar, dar de baja o consultar historial de un equipo específico.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANTENIMIENTO -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingMantenimiento">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMantenimiento" aria-expanded="false" aria-controls="collapseMantenimiento">
+          <i class="bi bi-tools"></i> Registro de Mantenimientos
+        </button>
+      </h2>
+      <div id="collapseMantenimiento" class="accordion-collapse collapse" aria-labelledby="headingMantenimiento" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Permite registrar, editar y consultar mantenimientos preventivos y correctivos por equipo y fecha.</p>
+          <ol>
+            <li>Seleccionar el equipo del inventario.</li>
+            <li>Cargar tipo de mantenimiento, fecha, descripción y técnico responsable.</li>
+            <li>Generar un PDF de reporte de mantenimiento si es necesario.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOPORTE -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSoporte">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSoporte" aria-expanded="false" aria-controls="collapseSoporte">
+          <i class="bi bi-headset"></i> Centro de Soporte
+        </button>
+      </h2>
+      <div id="collapseSoporte" class="accordion-collapse collapse" aria-labelledby="headingSoporte" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Formulario para enviar consultas o problemas técnicos al equipo de soporte.</p>
+          <ol>
+            <li>Ir a <strong>Soporte</strong> desde el menú.</li>
+            <li>Completar el formulario con tu nombre, correo y mensaje.</li>
+            <li>Presionar <strong>Enviar</strong>. El equipo responderá por correo.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXCOMBATIENTES -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingExcombatiente">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExcombatiente" aria-expanded="false" aria-controls="collapseExcombatiente">
+          <i class="bi bi-person-lines-fill"></i> Registro de Excombatientes
+        </button>
+      </h2>
+      <div id="collapseExcombatiente" class="accordion-collapse collapse" aria-labelledby="headingExcombatiente" data-bs-parent="#ayudaAccordion">
+        <div class="accordion-body">
+          <p>Administración de datos personales y documentos de excombatientes registrados.</p>
+          <ol>
+            <li>Ingresar a <strong>Excombatiente</strong>.</li>
+            <li>Cargar los datos personales completos: nombre, documento, localidad, condición, etc.</li>
+            <li>Adjuntar documentos digitalizados como PDF o imagen.</li>
+            <li>Consultar listado y exportar registros.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'administracion/js/ayuda.js' %}"></script>
+{% endblock %}

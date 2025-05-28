@@ -1,0 +1,93 @@
+/* ayuda.css - sin usar Bootstrap directamente */
+
+.ayuda-container {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f9f9f9, #eaeff4);
+  border-radius: 10px;
+  max-width: 960px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.ayuda-container h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.ayuda-intro {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #5d6d7e;
+}
+
+.accordion {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-item {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-button {
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.accordion-button:hover {
+  background-color: #2980b9;
+}
+
+.accordion-button.collapsed {
+  background-color: #5dade2;
+}
+
+.accordion-collapse {
+  display: none;
+  animation: slideDown 0.3s ease forwards;
+}
+
+.accordion-collapse.show {
+  display: block;
+}
+
+.accordion-body {
+  padding: 1rem 1.5rem;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.accordion-body ol {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.accordion-body li {
+  margin-bottom: 0.5rem;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 1000px; }
+}
