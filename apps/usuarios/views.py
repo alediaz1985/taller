@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
+from django.conf import settings
 
 @login_required
 def index(request):
@@ -18,11 +19,11 @@ def perfil_usuario(request):
     return render(request, 'usuarios/perfil.html', context)
 
 class CustomLoginView(LoginView):
-    template_name = 'usuarios/login.html'  # Asegúrate de usar la plantilla correcta
+    template_name = 'usuarios/login.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Login'  # Añadir el título al contexto
+        context['title'] = f"{settings.NOMBRE_EMPRESA} - Login"
         return context
 
 def logout_view(request):

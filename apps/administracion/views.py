@@ -1,14 +1,14 @@
+import os
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-import os
+
 import random
 from django.conf import settings
 
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from .forms import ContactoForm
 
-from django.contrib import messages  # Para los mensajes de éxito
+from django.contrib import messages
 from django.contrib.messages import get_messages
 
 from django.utils.decorators import method_decorator
@@ -49,68 +49,3 @@ def index_global(request):
 def index(request):
     context = {'title': 'Administración'}
     return render(request, 'administracion/index.html',context)
-
-
-"""
-funciona pero no redirije y no manda número de telefonos
-def contacto_view(request):
-    if request.method == 'POST':
-        form = ContactoForm(request.POST)
-        if form.is_valid():
-            # Recoger los datos del formulario
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            phone = form.cleaned_data['phone']
-            message = form.cleaned_data['message']
-
-            # Enviar un correo electrónico
-            send_mail(
-                f'Mensaje de {name}',
-                message,
-                email,
-                [settings.CONTACT_EMAIL],  # Define un correo de recepción en settings
-                fail_silently=False,
-            )
-            return HttpResponse('Gracias por tu mensaje.')
-    else:
-        form = ContactoForm()
-
-    return render(request, 'administracion/contacto.html', {'form': form})
-"""
-
-def contacto_view(request):
-    if request.method == 'POST':
-        form = ContactoForm(request.POST)
-        if form.is_valid():
-            # Recoger los datos del formulario
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            phone = form.cleaned_data.get('phone', 'No proporcionado')  # Si no se proporciona, usar un texto por defecto
-            message = form.cleaned_data['message']
-
-            # Crear el cuerpo del mensaje para incluir el teléfono
-            message_body = f"Nombre: {name}\nCorreo: {email}\nTeléfono: {phone}\n\nMensaje:\n{message}"
-
-            # Enviar un correo electrónico
-            send_mail(
-                f'Mensaje de {name}',  # Asunto del correo
-                message_body,          # Cuerpo del mensaje con los datos
-                email,                 # Remitente
-                [settings.CONTACT_EMAIL],  # Destinatario (definido en settings.py)
-                fail_silently=False,
-            )
-
-            # Mostrar mensaje de éxito
-            messages.success(request, 'Tu mensaje ha sido enviado exitosamente. Le responderemos a la brevedad.')
-
-            # Limpiar los mensajes después de mostrarlos
-            storage = get_messages(request)
-            for _ in storage:
-                pass  # Esto fuerza a que los mensajes se consuman
-
-            # Mostrar la página de confirmación
-            return render(request, 'administracion/confirmacion_contacto.html')  # Nueva página de confirmación
-    else:
-        form = ContactoForm()
-
-    return render(request, 'administracion/contacto.html', {'form': form})

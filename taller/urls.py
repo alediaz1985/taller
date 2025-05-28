@@ -18,6 +18,7 @@ urlpatterns = [
     path('notificaciones/', include('apps.notificaciones.urls')),
     path('pagos/', include('apps.pagos.urls')),
     path('cedulas/', include('apps.cedulas.urls', namespace='cedulas')),
+    path('contacto/', include('apps.contacto.urls', namespace='contacto')),
     path('soporte/', include('apps.soporte.urls')),
     path('turnos/', include('apps.turnos.urls')),
     path('accounts/', include('apps.usuarios.urls')),

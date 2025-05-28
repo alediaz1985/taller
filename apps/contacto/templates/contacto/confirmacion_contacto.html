@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/administracion.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="confirmation-message">
+    {% if enviado %}
+        <h2>¡Gracias por contactarnos{{ nombre|default:'' }}!</h2>
+        <p>Tu mensaje ha sido enviado correctamente. Le responderemos a la brevedad.</p>
+    {% else %}
+        <h2 style="color: red;">Hubo un problema al enviar tu mensaje</h2>
+        <p>Por favor, intentá nuevamente más tarde o escribinos a <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.</p>
+    {% endif %}
+    
+    <p>Haz clic en el botón para volver a la página de inicio.</p>
+    
+    <form method="get" action="{% url 'administracion:index_global' %}">
+        <button type="submit" class="btn btn-primary">Volver a Inicio</button>
+    </form>
+</div>
+{% endblock %}

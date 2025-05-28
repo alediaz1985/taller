@@ -1,10 +1,10 @@
+# base.py
+from decouple import config, Csv
 import os
 from django.contrib.messages import constants as messages
 
-# BASE_DIR apunta al directorio raíz del proyecto.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'apps.notificaciones',
     'apps.pagos',
     'apps.cedulas',
+    'apps.contacto',
     'apps.consultas',
     'apps.soporte',
     'apps.turnos',
@@ -46,13 +47,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Tiempo de vida de la sesión en segundos
-SESSION_COOKIE_AGE = 1800  # 30 minutos
-
-# Cerrar sesión al cerrar el navegador
+SESSION_COOKIE_AGE = 1800
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-# Usa sesiones basadas en la base de datos
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 ROOT_URLCONF = 'taller.urls'
@@ -60,14 +56,15 @@ ROOT_URLCONF = 'taller.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'taller', 'templates')],  # Ruta a las plantillas globales
-        'APP_DIRS': True,  # Busca automáticamente plantillas en cada aplicación
+        'DIRS': [os.path.join(BASE_DIR, 'taller', 'templates')],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'taller.settings.nombre_empresa_context',
             ],
         },
     },
@@ -75,39 +72,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'taller.wsgi.application'
 
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'es-ar'
-
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+NOMBRE_EMPRESA = config('NOMBRE_EMPRESA', default='Mi Empresa')
+
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -115,19 +95,28 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'apps', 'authturno', 'buscadorpdf', 'static', 'images'),
 ]
 STATIC_BASE_PATH = os.path.join(BASE_DIR, 'apps', 'authturno', 'buscadorpdf', 'static', 'images')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 CEDULAS_DIR = 'C:/CEDULAS'
-CEDULAS_URL = '/cedulas_pdf/'  # Ruta pública para acceder desde el navegador
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+CEDULAS_URL = '/cedulas_pdf/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 LOGIN_REDIRECT_URL = 'index_global'
 LOGOUT_REDIRECT_URL = 'index_global'
 
+# Variables sensibles externas
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv)
 
-# Correo de contacto que recibiría los mensajes
-CONTACT_EMAIL = 'formulariodecorreosp@gmail.com'
+# Email
+CONTACT_EMAIL = config('CONTACT_EMAIL')
 
+
+from django.conf import settings
+
+# Inyectar NOMBRE_EMPRESA globalmente a todos los templates
+def nombre_empresa_context(request):
+    return {
+        'nombre_empresa': settings.NOMBRE_EMPRESA
+    }
