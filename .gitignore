@@ -166,3 +166,4 @@ cython_debug/
 
 # Ignorar configuración local con claves
 taller/settings/local.py
+taller/test_mailgun.py
