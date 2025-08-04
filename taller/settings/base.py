@@ -86,6 +86,9 @@ USE_L10N = True
 USE_TZ = True
 
 NOMBRE_EMPRESA = config('NOMBRE_EMPRESA', default='Mi Empresa')
+DIRECCION_EMPRESA = config('DIRECCION_EMPRESA', default='Dirección no definida')
+TELEFONO_EMPRESA = config('TELEFONO_EMPRESA', default='Teléfono no definido')
+EMAIL_EMPRESA = config('EMAIL_EMPRESA', default='Email no definido')
 
 
 
@@ -118,5 +121,8 @@ from django.conf import settings
 # Inyectar NOMBRE_EMPRESA globalmente a todos los templates
 def nombre_empresa_context(request):
     return {
-        'nombre_empresa': settings.NOMBRE_EMPRESA
+        'nombre_empresa': settings.NOMBRE_EMPRESA,
+        'direccion_empresa': settings.DIRECCION_EMPRESA,
+        'telefono_empresa': settings.TELEFONO_EMPRESA,
+        'email_empresa': settings.EMAIL_EMPRESA,
     }

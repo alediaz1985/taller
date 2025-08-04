@@ -27,10 +27,30 @@
                 {{ form.equipo }}
             </div>
         </div>
+
+        <!-- Búsqueda por texto -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                {{ form.texto_busqueda.label_tag }}
+                {{ form.texto_busqueda }}
+            </div>
+            <div class="col-md-6">
+                <label class="radio-group-label">Buscar por:</label>
+                {% for radio in form.tipo_busqueda %}
+                    <div class="form-check form-check-inline">
+                        {{ radio.tag }} {{ radio.choice_label }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Botones -->
         <div class="row mt-3">
             <div class="col-md-12 text-right">
                 <button type="submit" class="button button-green">Consultar</button>
-                <button type="submit" name="generar_pdf" class="button button-gray">Generar PDF</button>
+                {% if mantenimientos %}
+                    <button type="submit" name="generar_pdf" class="button button-gray">Generar PDF</button>
+                {% endif %}
             </div>
         </div>
     </form>
@@ -43,6 +63,7 @@
             <tr>
                 <th>Fecha</th>
                 <th>Equipo</th>
+                <th>Nº Serie</th>
                 <th>Tipo de Trabajo</th>
                 <th>Observaciones</th>
                 <th>Responsable</th>
@@ -53,6 +74,7 @@
             <tr>
                 <td>{{ mantenimiento.fecha|date:"d-m-Y H:i" }}</td>
                 <td>{{ mantenimiento.equipo }}</td>
+                <td>{{ mantenimiento.equipo.numero_serie }}</td>
                 <td>{{ mantenimiento.tipo_trabajo }}</td> 
                 <td>{{ mantenimiento.observaciones }}</td>
                 <td>{{ mantenimiento.responsable }}</td>
@@ -61,7 +83,9 @@
         </tbody>
     </table>
     {% else %}
-    <p>No se encontraron mantenimientos.</p>
+        {% if request.method == "POST" %}
+            <p>No se encontraron mantenimientos.</p>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}

@@ -54,8 +54,9 @@
             text-align: center;
         }
         /* Ajusta el ancho de cada columna según sea necesario */
-        th.fecha, td.fecha { width: 18%; }
-        th.equipo, td.equipo { width: 35%; }
+        th.fecha, td.fecha { width: 15%; }
+        th.equipo, td.equipo { width: 20%; }
+        th.equipo.numero_serie, td.equipo.numero_serie { width: 18%; }
         th.tipo, td.tipo { width: 25%; }
         th.observaciones, td.observaciones { width: 32%; }
         th.responsable, td.responsable { width: 12%; }
@@ -66,13 +67,13 @@
     <!-- Encabezado con información del taller y la fecha de consulta -->
     <div class="header">
         <div class="title">
-            <strong>Taller de Revisión Técnica Vehicular Roberto R. Polentarutti de REVINOR SRL.</strong><br>
-            Ruta 16 Km 176, Pcia. Roque Sáenz Peña, CHACO<br>
-            Cel: 3644122222 - contacto@rtopolentarutti.com.ar
+            <strong>Taller de Revisión Técnica Vehicular Roberto R. Polentarutti de {{ nombre_empresa }}</strong><br>
+            {{ direccion_empresa }}<br>
+            Cel: {{ telefono_empresa }} - {{ email_empresa }}
         </div>
         <div class="date">
             <strong>Fecha de consulta:</strong><br>
-            {{ current_date }} <!-- Aquí debes pasar la fecha actual desde el backend -->
+            {{ current_date }} <!-- Aquí pasa la fecha actual desde el backend -->
         </div>
     </div>
 
@@ -84,6 +85,7 @@
                 <tr>
                     <th class="fecha">Fecha</th>
                     <th class="equipo">Equipo</th>
+                    <th class="equipo">Nº Serie</th>
                     <th class="tipo">Tipo de Trabajo</th>
                     <th class="observaciones">Observaciones</th>
                     <th class="responsable">Responsable</th>
@@ -94,6 +96,7 @@
                 <tr>
                     <td class="fecha">{{ mantenimiento.fecha|date:"d-m-Y H:i" }}</td>
                     <td class="equipo">{{ mantenimiento.equipo }}</td>
+                    <td class="equipo">{{ mantenimiento.equipo.numero_serie }}</td>
                     <td class="tipo">{{ mantenimiento.tipo_trabajo }}</td>
                     <td class="observaciones">{{ mantenimiento.observaciones }}</td>
                     <td class="responsable">{{ mantenimiento.responsable }}</td>
