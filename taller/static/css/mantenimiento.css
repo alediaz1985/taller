@@ -231,39 +231,3 @@ tr:nth-child(even) {
     }
 }
 
-
-
-/* Estilo para grupo de radio buttons */
-.radio-group-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-    font-size: 16px;
-}
-
-/* Estilo para cada radio button en línea */
-.form-check-inline {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 15px;
-    font-size: 15px;
-    color: #333;
-}
-
-/* Estilo del input radio */
-.form-check-inline input[type="radio"] {
-    accent-color: #007bff; /* Celeste moderno */
-    transform: scale(1.2);
-    margin-right: 5px;
-}
-
-/* Responsive para radios en pantallas pequeñas */
-@media (max-width: 768px) {
-    .form-check-inline {
-        display: block;
-        margin-bottom: 6px;
-    }
-}
-
-

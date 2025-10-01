@@ -49,16 +49,3 @@ def index_global(request):
 def index(request):
     context = {'title': 'Administración'}
     return render(request, 'administracion/index.html',context)
-
-from django.shortcuts import render
-
-def ayuda(request):
-    temas = {
-        "Subir Documentos": "Aquí aprenderás cómo cargar archivos correctamente...",
-        "Buscar PDF por Patente": "Usa el buscador en la parte superior para ingresar una patente...",
-        "Generar PDF Combinado": "Luego de seleccionar archivos, hacé clic en Generar PDF...",
-        "Registro de Usuario": "Solo los administradores pueden registrar usuarios...",
-        "Historial de Búsqueda": "El historial muestra los últimos accesos por usuario registrado...",
-        # agregá más temas aquí...
-    }
-    return render(request, "administracion/ayuda.html", {"temas": temas})

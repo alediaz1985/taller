@@ -86,9 +86,6 @@ USE_L10N = True
 USE_TZ = True
 
 NOMBRE_EMPRESA = config('NOMBRE_EMPRESA', default='Mi Empresa')
-DIRECCION_EMPRESA = config('DIRECCION_EMPRESA', default='Dirección no definida')
-TELEFONO_EMPRESA = config('TELEFONO_EMPRESA', default='Teléfono no definido')
-EMAIL_EMPRESA = config('EMAIL_EMPRESA', default='Email no definido')
 
 
 
@@ -97,7 +94,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'taller', 'static'),
     os.path.join(BASE_DIR, 'apps', 'authturno', 'buscadorpdf', 'static', 'images'),
 ]
-STATIC_BASE_PATH = os.path.join(BASE_DIR, 'apps', 'authturno', 'buscadorpdf', 'static', 'images')
+STATIC_BASE_PATH = os.path.join(BASE_DIR, 'apps', 'authturno', 'static', 'images')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 CEDULAS_DIR = 'C:/CEDULAS'
@@ -121,8 +118,5 @@ from django.conf import settings
 # Inyectar NOMBRE_EMPRESA globalmente a todos los templates
 def nombre_empresa_context(request):
     return {
-        'nombre_empresa': settings.NOMBRE_EMPRESA,
-        'direccion_empresa': settings.DIRECCION_EMPRESA,
-        'telefono_empresa': settings.TELEFONO_EMPRESA,
-        'email_empresa': settings.EMAIL_EMPRESA,
+        'nombre_empresa': settings.NOMBRE_EMPRESA
     }

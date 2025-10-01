@@ -26,15 +26,3 @@ class ConsultaMantenimientoForm(forms.Form):
     fecha_inicio = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     fecha_fin = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     equipo = forms.ModelChoiceField(queryset=Equipo.objects.all(), required=False, label='Equipo')
-    
-    #agregado busqueda por texto o codigo 17/07/2025
-    #______________________________________________________________________________________________________
-    texto_busqueda = forms.CharField(label="Texto a buscar", required=False)
-        
-    OPCIONES_BUSQUEDA = [
-        ('codigo_interno', 'Código Interno'),
-        ('nombre', 'Marca o Modelo'),
-        ('numero_serie', 'Número de Serie'),
-    ]
-    tipo_busqueda = forms.ChoiceField(choices=OPCIONES_BUSQUEDA, required=False, widget=forms.RadioSelect)
-    #______________________________________________________________________________________________________
